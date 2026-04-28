@@ -2,15 +2,15 @@
   "version": 2,
   "builds": [
     {
-      "src": "dvdrental_project/dvdrental_project/wsgi.py",
+      "src": "index.py",
       "use": "@vercel/python",
-      "config": { "maxLambdaSize": "15mb", "runtime": "python3.9" }
+      "config": { "runtime": "python3.9" }
     }
   ],
   "routes": [
     {
       "src": "/(.*)",
-      "dest": "dvdrental_project/dvdrental_project/wsgi.py"
+      "dest": "index.py"
     }
   ]
 }

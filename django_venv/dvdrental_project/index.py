@@ -1,0 +1,1 @@
+from dvdrental_project.dvdrental_project.wsgi import app
