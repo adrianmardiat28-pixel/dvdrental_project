@@ -1,0 +1,91 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}DVD Rental {% endblock %}</title>
+    
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
+    {% block extra_css %}{% endblock %}
+
+    <style>
+        /* TEMA CLEAN LOOK GLOBAL */
+        body { background-color: #f8f9fa; color: #333333; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+        
+        /* CSS Sidebar */
+        .clean-sidebar { background-color: #ffffff; border-right: 1px solid #e9ecef; min-height: 100vh; box-shadow: 2px 0 10px rgba(0,0,0,0.02); }
+        .sidebar-link { color: #495057; border-radius: 8px; padding: 10px 15px; text-decoration: none; display: block; margin-bottom: 8px; transition: all 0.2s; font-weight: 500; }
+        .sidebar-link:hover { background-color: #f8f9fa; color: #0d6efd; }
+        
+        /* MAGIC CSS: Otomatis memberi warna biru pada menu yang sedang aktif */
+        .active-link { background-color: #eef2ff !important; color: #4f46e5 !important; font-weight: bold; }
+
+        /* CSS Komponen Global */
+        .clean-card { background-color: #ffffff; border-radius: 12px; border: 1px solid #eef2f5; padding: 24px; box-shadow: 0 4px 15px rgba(0, 0, 0, 0.03); transition: transform 0.2s; }
+        .btn-clean-action { background-color: #ffffff; color: #495057; border: 1px solid #dee2e6; border-radius: 8px; transition: all 0.2s; font-weight: 500; }
+        .btn-clean-action:hover { background-color: #f8f9fa; color: #0d6efd; border-color: #0d6efd; }
+        .text-primary-blue { color: #0d6efd; }
+    </style>
+</head>
+<body>
+
+<div class="container-fluid">
+    <div class="row">
+        
+        <nav class="col-md-2 d-none d-md-block clean-sidebar py-4 position-fixed" style="width: 16.666667%; z-index: 1000;">
+            <div class="text-center mb-4">
+                <img src="{% static 'dvdrental_prediction/images/pu_logo.jpg' %}" alt="PU Logo" class="img-fluid rounded mb-3" style="max-width: 120px;">
+                <h6 class="fw-bold text-dark">DVD Rental </h6>
+            </div>
+            
+            <div class="px-3 mt-4">
+                <p class="text-muted small text-uppercase fw-bold mb-2 px-2">Main Menu</p>
+                
+                <a class="sidebar-link {% if request.resolver_match.url_name == 'home' %}active-link{% endif %}" href="{% url 'home' %}">
+                    <i class="fas fa-home me-2"></i> Dashboard
+                </a>
+                
+                <a class="sidebar-link {% if request.resolver_match.url_name == 'movie_list' %}active-link{% endif %}" href="{% url 'movie_list' %}">
+                    <i class="fas fa-film me-2"></i> Movie List
+                </a>
+                
+                <a class="sidebar-link {% if request.resolver_match.url_name == 'predict_movie_demand' %}active-link{% endif %}" href="{% url 'predict_movie_demand' %}">
+                    <i class="fas fa-robot me-2"></i> Movie Predictor
+                </a>
+                
+                <a class="sidebar-link {% if request.resolver_match.url_name == 'analytics' %}active-link{% endif %}" href="{% url 'analytics' %}">
+                    <i class="fas fa-chart-line me-2"></i> Analytical Dashboard
+                </a>
+
+                <a class="sidebar-link {% if request.resolver_match.url_name == 'customer_prediction_view' %}active-link{% endif %}" href="{% url 'customer_prediction_view' %}">
+                    <i class="fas fa-users me-2"></i> Customer Predictor
+                </a>
+                
+                <p class="text-muted small text-uppercase fw-bold mt-4 mb-2 px-2">System</p>
+                <a class="sidebar-link" href="/admin/dvdrental_prediction/moviemodelinfo/" target="_blank">
+                    <i class="fas fa-cogs me-2"></i> Admin Panel
+                </a>
+                <a class="sidebar-link {% if request.resolver_match.url_name == 'about' %}active-link{% endif %}" href="{% url 'about' %}">
+                    <i class="fas fa-info-circle me-2"></i> About
+                </a>
+            </div>
+        </nav>
+
+        <main class="col-md-10 ms-auto px-4 py-4" style="background-color: #f8f9fa; min-height: 100vh;">
+            {% block content %}
+            {% endblock %}
+        </main>
+
+    </div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+{% block extra_scripts %}{% endblock %}
+
+</body>
+</html>

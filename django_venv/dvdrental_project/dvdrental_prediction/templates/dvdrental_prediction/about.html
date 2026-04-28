@@ -1,0 +1,105 @@
+{% extends 'dvdrental_prediction/base.html' %}
+{% load static %}
+
+{% block title %}About - DVD Rental AI{% endblock %}
+
+{% block extra_css %}
+<style>
+    .about-header {
+        background: linear-gradient(135deg, #0d6efd 0%, #003d99 100%);
+        color: white;
+        padding: 4rem 2rem;
+        border-radius: 15px;
+        margin-bottom: 3rem;
+        text-align: center;
+    }
+    .feature-icon {
+        font-size: 2.5rem;
+        color: #0d6efd;
+        margin-bottom: 1rem;
+    }
+    .tech-badge {
+        background: #e9ecef;
+        color: #495057;
+        padding: 5px 15px;
+        border-radius: 50px;
+        font-weight: 600;
+        margin: 5px;
+        display: inline-block;
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="about-header shadow">
+    <h1 class="display-4 fw-bold">DVD Rental AI Prediction</h1>
+    <p class="lead">Integrasi Data Warehouse (OLAP) dan Machine Learning untuk Optimasi Inventaris.</p>
+</div>
+
+<div class="container">
+    <div class="row g-5 align-items-center mb-5">
+        <div class="col-md-6">
+            <h2 class="fw-bold mb-4 text-dark">Tujuan Proyek</h2>
+            <p class="text-muted">
+                Proyek ini dirancang untuk membantu pemilik toko DVD dalam mengelola stok film secara cerdas. 
+                Dengan memanfaatkan data historis dari database <strong>Sakila</strong>, sistem ini mampu memberikan 
+                insight mendalam tentang pola penyewaan pelanggan.
+            </p>
+            <p class="text-muted">
+                Masalah utama yang diselesaikan adalah <strong>"Dead Stock"</strong> (stok mati), di mana sistem 
+                memprediksi apakah sebuah film baru akan laku (High Demand) atau tidak sebelum stok dibeli.
+            </p>
+            <div class="mt-4">
+                <span class="tech-badge">Python (Django)</span>
+                <span class="tech-badge">PostgreSQL</span>
+                <span class="tech-badge">Scikit-Learn</span>
+                <span class="tech-badge">Chart.js</span>
+                <span class="tech-badge">Bootstrap 5</span>
+            </div>
+        </div>
+        <div class="col-md-6 text-center">
+            <div class="p-4 bg-white shadow-sm rounded-4 border">
+                <i class="fas fa-database feature-icon"></i>
+                <h4 class="fw-bold">Arsitektur OLAP</h4>
+                <p class="small text-muted">Menggunakan tabel fakta (Fact Table) untuk memproses ribuan data transaksi menjadi informasi yang siap dianalisis secara real-time.</p>
+                <hr>
+                <i class="fas fa-robot feature-icon"></i>
+                <h4 class="fw-bold">AI Prediction</h4>
+                <p class="small text-muted">Model Machine Learning (Random Forest/Logistic Regression) yang dilatih untuk mengenali karakteristik film populer.</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="row text-center g-4 mb-5">
+        <h3 class="fw-bold mb-4">Fitur Utama Aplikasi</h3>
+        <div class="col-md-4">
+            <div class="p-4 bg-light rounded-4 h-100">
+                <i class="fas fa-chart-area text-primary mb-3" style="font-size: 2rem;"></i>
+                <h5>Analytical Dashboard</h5>
+                <p class="small text-muted">Visualisasi distribusi rating film dan analisis demand pasar secara dinamis.</p>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="p-4 bg-light rounded-4 h-100">
+                <i class="fas fa-magic text-primary mb-3" style="font-size: 2rem;"></i>
+                <h5>Demand Predictor</h5>
+                <p class="small text-muted">Input spesifikasi film (durasi, rating, harga) untuk mendapatkan prediksi popularitas.</p>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="p-4 bg-light rounded-4 h-100">
+                <i class="fas fa-cogs text-primary mb-3" style="font-size: 2rem;"></i>
+                <h5>Automated ETL</h5>
+                <p class="small text-muted">Proses Extract, Transform, dan Load data dari database operasional ke database analitik.</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="text-center py-5 border-top">
+        <p class="text-muted">Dikembangkan sebagai Proyek Akhir Mata Kuliah Data Science / Data Warehouse.</p>
+        <a href="{% url 'home' %}" class="btn btn-outline-primary px-4">
+            <i class="fas fa-home me-2"></i> Kembali ke Beranda
+        </a>
+    </div>
+</div>
+{% endblock %}

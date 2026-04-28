@@ -1,0 +1,72 @@
+{% extends 'dvdrental_prediction/base.html' %}
+{% load static %}
+
+{% block title %}Movie List - DVD Rental AI{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="https://cdn.datatables.net/1.13.4/css/dataTables.bootstrap5.min.css">
+{% endblock %}
+
+{% block content %}
+<div class="d-flex justify-content-between align-items-center mb-4 border-bottom pb-3">
+    <div>
+        <h3 class="fw-bold text-dark mb-1">Movie Database</h3>
+        <p class="text-muted mb-0">Browse and search the complete inventory of DVD rentals.</p>
+    </div>
+    <a href="{% url 'predict_movie_demand' %}" class="btn btn-primary shadow-sm fw-bold">
+        <i class="fas fa-robot me-2"></i> Predict Demand
+    </a>
+</div>
+
+<div class="clean-card">
+    <div class="table-responsive">
+        <table id="movieTable" class="table table-hover table-borderless align-middle">
+            <thead class="table-light border-bottom">
+                <tr>
+                    <th>Title</th>
+                    <th>Release Year</th>
+                    <th>Rental Rate</th>
+                    <th>Duration (Min)</th>
+                    <th>Rating</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for movie in movies %}
+                <tr>
+                    <td class="fw-bold text-dark">{{ movie.title }}</td>
+                    <td>{{ movie.release_year }}</td>
+                    <td><span class="badge bg-success rounded-pill px-3 py-2">${{ movie.rental_rate }}</span></td>
+                    <td>{{ movie.length }}</td>
+                    <td><span class="badge bg-secondary">{{ movie.rating }}</span></td>
+                    <td>
+                        <a href="{% url 'movie_detail' movie.film_id %}" class="btn btn-sm btn-outline-primary fw-bold px-3">Details</a>
+                    </td>
+                </tr>
+                {% empty %}
+                <tr>
+                    <td colspan="6" class="text-center py-4 text-muted">No movies found in database.</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_scripts %}
+<script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/1.13.4/js/dataTables.bootstrap5.min.js"></script>
+<script>
+    $(document).ready(function() {
+        $('#movieTable').DataTable({
+            "pageLength": 10,
+            "ordering": true,
+            "language": {
+                "search": "Quick Search:",
+                "lengthMenu": "Show _MENU_ movies per page"
+            }
+        });
+    });
+</script>
+{% endblock %}

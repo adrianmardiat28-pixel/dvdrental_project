@@ -1,0 +1,98 @@
+{% extends 'dvdrental_prediction/base.html' %}
+{% load static %}
+
+{% block title %}Dashboard - Movie AI{% endblock %}
+
+{% block content %}
+<div class="clean-card mb-4 position-relative overflow-hidden" style="background: linear-gradient(135deg, #ffffff, #f0f4ff);">
+    <div class="row align-items-center">
+        <div class="col-md-8">
+            <h2 class="fw-bold text-dark mb-2">Welcome to Movie Analytics</h2>
+            <p id="generated-text" class="text-primary fw-bold mb-3" style="font-family: monospace;">Loading text...</p>
+            
+            <p class="text-muted mb-4" style="max-width: 600px;">
+                Data-driven movie classification system. Extract, transform, analyze, and predict movie rental demand using Random Forest machine learning.
+            </p>
+            <a href="{% url 'predict_movie_demand' %}" class="btn btn-primary px-4 py-2 fw-bold shadow-sm" style="border-radius: 8px;">
+                <i class="fas fa-rocket me-2"></i> Launch AI Predictor
+            </a>
+        </div>
+        <div class="col-md-4 text-center d-none d-md-block opacity-25">
+            <i class="fas fa-chart-pie" style="font-size: 8rem; color: #0d6efd;"></i>
+        </div>
+    </div>
+</div>
+
+<div class="row g-4 mb-4">
+    <div class="col-md-3">
+        <div class="clean-card border-top border-4 border-primary h-100">
+            <p class="text-muted small text-uppercase fw-bold mb-1">Total Movies</p>
+            <h3 id="stat-total-movies" class="fw-bold text-dark mb-0">...</h3>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="clean-card border-top border-4 border-success h-100">
+            <p class="text-muted small text-uppercase fw-bold mb-1">Avg Rental Rate</p>
+            <h3 id="stat-avg-rate" class="fw-bold text-dark mb-0">...</h3>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="clean-card border-top border-4 border-warning h-100">
+            <p class="text-muted small text-uppercase fw-bold mb-1">Model Accuracy</p>
+            <h3 id="stat-accuracy" class="fw-bold text-dark mb-0">...</h3>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="clean-card border-top border-4 border-info h-100">
+            <p class="text-muted small text-uppercase fw-bold mb-1">System Status</p>
+            <h3 class="fw-bold text-dark mb-0">Online <i class="fas fa-check-circle text-success ms-1 fs-5"></i></h3>
+        </div>
+    </div>
+</div>
+
+<div class="row g-4">
+    <div class="col-md-6">
+        <div class="clean-card h-100">
+            <h6 class="fw-bold text-dark mb-4">Demand Distribution Prediction</h6>
+            <div style="height: 250px; display: flex; justify-content: center;">
+                <canvas id="demandChart"></canvas>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-6">
+        <div class="clean-card h-100 d-flex flex-column">
+            <h6 class="fw-bold text-dark mb-4">Quick Actions</h6>
+            <div class="d-grid gap-3 mb-auto">
+                <a href="{% url 'predict_movie_demand' %}" class="btn btn-clean-action py-3 text-start px-4">
+                    <i class="fas fa-robot text-primary-blue me-3 fs-5"></i> 
+                    <strong>Predict New Movie Demand</strong>
+                    <p class="text-muted small mb-0 ms-5 mt-1">Run machine learning model on new data</p>
+                </a>
+                <a href="{% url 'movie_list' %}" class="btn btn-clean-action py-3 text-start px-4">
+                    <i class="fas fa-table text-success me-3 fs-5"></i> 
+                    <strong>Browse Movies Table</strong>
+                    <p class="text-muted small mb-0 ms-5 mt-1">View and filter complete movie dataset</p>
+                </a>
+                <a href="{% url 'analytics' %}" class="btn btn-clean-action py-3 text-start px-4">
+                    <i class="fas fa-chart-line text-warning me-3 fs-5"></i> 
+                    <strong>View Analytics</strong>
+                    <p class="text-muted small mb-0 ms-5 mt-1">Real-time charts and business insights</p>
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_scripts %}
+<script src="{% static 'dvdrental_prediction/js/myscript.js' %}"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<script>
+    const apiHomeDataUrl = "{% url 'api_home_data' %}";
+</script>
+
+<script src="{% static 'dvdrental_prediction/js/home_dashboard.js' %}"></script>
+{% endblock %}
